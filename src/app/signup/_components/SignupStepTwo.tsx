@@ -26,7 +26,7 @@ export const SignupStepTwo = ({ email }: SignupStepTwoProps) => {
 
   const handleSubmit = async (values: { password: string }) => {
     try {
-      await axios.post("http://localhost:4000/users/signup", {
+      await axios.post("http://localhost:4000/users", {
         email,
         password: values.password,
       });

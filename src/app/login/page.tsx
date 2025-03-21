@@ -24,9 +24,13 @@ export const Login = () => {
         values
       );
 
-      if (response.data.user.role === "ADMIN") {
+      if (response.data.user.role === "admin") {
         push("/admin");
+      } else {
+        push("/");
       }
+
+      console.log(response);
     } catch (error: any) {
       toast.error(`Error: ${error.response?.data?.message || error.message}`);
     }
