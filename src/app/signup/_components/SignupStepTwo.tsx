@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import * as Yup from "yup";
 
-const stepTwoSchema = Yup.object().shape({
+const stepTwoSchema = Yup.object({
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),

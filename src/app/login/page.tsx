@@ -8,6 +8,7 @@ import { userSchema } from "@/utils/loginValidation";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
+import Link from "next/link";
 
 type LoginInfoTypes = {
   email: string;
@@ -23,6 +24,11 @@ export const Login = () => {
         `http://localhost:4000/users/login`,
         values
       );
+      if (response.data.success) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      console.log(response.data);
 
       if (response.data.user.role === "admin") {
         push("/admin");
@@ -30,7 +36,7 @@ export const Login = () => {
         push("/");
       }
 
-      console.log(response);
+      toast.success("Login Successful!");
     } catch (error: any) {
       toast.error(`Error: ${error.response?.data?.message || error.message}`);
     }
@@ -104,9 +110,9 @@ export const Login = () => {
 
           <p className="mt-4 text-sm">
             Don’t have an account?{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link href="/signup" className="text-blue-600 hover:underline">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>
