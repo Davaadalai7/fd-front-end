@@ -1,39 +1,26 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import React from "react";
 import { useJwt } from "react-jwt";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const [token, setToken] = useState<string | null>(null);
+  const pathName = usePathname();
+
+  const storedToken =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const { isExpired } = useJwt(storedToken!);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token");
-      setToken(storedToken);
-    }
-  }, []);
-
-  const { isExpired, decodedToken } = useJwt(token!);
-
-  useEffect(() => {
-    if (!token) {
+    if (!storedToken || isExpired) {
       router.push("/login");
       return;
+    } else if (pathName === "/login") {
+      router.push("/");
     }
-    console.log(decodedToken);
-
-    try {
-      if (isExpired) {
-        localStorage.removeItem("token");
-        router.push("/login");
-      }
-    } catch (error) {
-      localStorage.removeItem("token");
-      router.push("/login");
-    }
-  }, [token, isExpired, router]);
+  }, [isExpired, router]);
 
   return children;
 };

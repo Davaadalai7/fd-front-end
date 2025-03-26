@@ -33,10 +33,10 @@ export const SignupStepTwo = ({ email }: SignupStepTwoProps) => {
 
       toast.success("Account created successfully! Redirecting to login...");
 
-      // Redirect to login after 1.5 seconds
+      // Redirect to login after 1 seconds
       setTimeout(() => {
         router.push("/login");
-      }, 1500);
+      }, 1000);
     } catch (error: any) {
       toast.error(`Error: ${error.response?.data?.message || error.message}`);
     }
