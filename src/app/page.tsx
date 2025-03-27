@@ -4,19 +4,19 @@ import { useState } from "react";
 import { PlusCircle, Edit } from "lucide-react";
 
 // Define TypeScript interfaces for type safety
-interface Category {
+type Category = {
   name: string;
   count: number;
-}
+};
 
-interface Dish {
+type Dish = {
   id: number;
   name: string;
   description: string;
   price: string;
   category: string;
   image: string;
-}
+};
 
 // Placeholder for actual API call
 const fetchDishes = async (category?: string): Promise<Dish[]> => {

@@ -1,6 +1,6 @@
-import { DishButton } from "../_components/DishButton.tsx";
-import { Category, Food } from "@/utils/types.tsx";
-import { AddCategoryButton } from "../_components/AddCategoryButton.tsx";
+import { DishButton } from "../_components/DishButton";
+import { Category, Food } from "@/utils/types";
+import { AddCategoryButton } from "../_components/AddCategoryButton";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -20,6 +20,7 @@ export const Categories = (props: {
       return response.data;
     },
   });
+
   return (
     <div className="bg-white rounded-md p-5">
       <p>Dishes Category</p>
@@ -28,11 +29,11 @@ export const Categories = (props: {
         {isLoading ? (
           <div>Loading categories</div>
         ) : (
-          cateList?.map((el: Category, index: number) => {
+          CatList?.map((el: Category, index: number) => {
             return (
               <DishButton
                 key={index}
-                name={el.categoryName}
+                name={el.name} // `categoryName` биш `name` гэж өөрчлөв
                 size={el.foodCount}
               />
             );

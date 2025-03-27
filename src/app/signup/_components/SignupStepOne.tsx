@@ -26,7 +26,7 @@ export const SignupStepOne = ({ onNext }: SignupStepOneProps) => {
         onSubmit={(values) => onNext(values.email)}
       >
         {({ values, handleChange, handleBlur }) => (
-          <Form className="mt-6 ">
+          <Form className="mt-6">
             <div className="mb-4">
               <Field
                 name="email"
