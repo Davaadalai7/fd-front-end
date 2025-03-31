@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PlusCircle, Edit } from "lucide-react";
+import Header from "@/components/Header";
 
 // Define TypeScript interfaces for type safety
 type Category = {
@@ -58,6 +59,7 @@ export default function FoodMenu() {
 
   return (
     <div className="bg-white min-h-screen p-6">
+      <Header />
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">NomNom Menu</h1>
         <img
